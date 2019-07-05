@@ -9,29 +9,38 @@ echo If the branch you want to commit does not exist this script will create the
 echo.
 
 set /p check="Does the branch you are working on exist in the remote repo? (yes / no) : "
-set /p inputbranch="What branch would you like to commit (your branch you are working on)? : "
 set /p masterbranch="What branch would you like to commit to (probably master)? : "
+set /p inputbranch="What branch would you like to commit (your branch you are working on)? : "
 set /p message="What would you like your commit message to say? : "
 
 :: merge process
 git reset HEAD -- .
 git checkout %masterbranch%
 git pull origin %masterbranch%
-IF /I "%check%"=="yes" (
+IF /I "%check%"=="no" (
+    echo creating branch
+    git checkout -b %inputbranch%
+) ELSE (
     echo branch exists
     git checkout %inputbranch%
     git pull origin %inputbranch%
-) ELSE (
-    echo creating branch
-    git checkout -b %inputbranch%
 )
 git add .
 git commit -m "%message%"
 git push -u origin HEAD
-git checkout %masterbranch%
-git pull origin %masterbranch%
-git checkout %inputbranch%
-git merge %masterbranch%
+IF /I "%masterbranch%"=="" (
+    git checkout master
+    git pull origin master
+    git checkout %inputbranch%
+    git merge master
+
+) ELSE (
+    git checkout %masterbranch%
+    git pull origin %masterbranch%  
+    git checkout %inputbranch%
+    git merge %masterbranch%
+
+)
 
 
 :: tfs pull requests instructions
@@ -47,4 +56,5 @@ echo 5: Select relative to the branch you commited to (probably master)
 echo 6: Fill out any other details you may need
 
 :: wait for the user to exit window
+:: TODO figure out what paths are needed
 PAUSE
