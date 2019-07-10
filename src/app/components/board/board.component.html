@@ -1,0 +1,7 @@
+<div #canvasWrapper>
+  <div width='100vw' height='100vh'>
+    <button id='xout' [style.padding-right]="buttonPadding" type='button' class='btn btn-dark' (click)='sidebarToggle()'>{{buttonText}}</button>
+  </div>
+  <canvas #canvas></canvas>
+</div>
+<app-sidebar (clear)='clearCanvas()' *ngIf='sidebarActive'></app-sidebar>

@@ -3,12 +3,14 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BackgroundComponent } from './components/background/background.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { BoardComponent } from './components/board/board.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BackgroundComponent
+    SidebarComponent,
+    BoardComponent
   ],
   imports: [
     BrowserModule,
