@@ -4,3 +4,18 @@ canvas {
     width: 100vw;
     overflow: hidden;
 }
+
+#xout {
+    position: fixed;
+    right: 0;
+    font-size: 25;
+    z-index: 2;
+
+}
+
+#canvasWrapper {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+}
